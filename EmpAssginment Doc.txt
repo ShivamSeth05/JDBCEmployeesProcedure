@@ -1,0 +1,67 @@
+Table Emp50-
+
+create table Emp50(
+eid number(10),
+ename varchar(20),
+edesg varchar(15));
+/
+3
+
+Table EmpAddress50-
+
+create table EmpAddress50(
+eid number(10),
+hno varchar(15),
+sname varchar2(20),
+city varchar2(15),
+state varchar2(15),
+pincode number(15))
+/
+
+
+Table EmpContact50-
+
+create table EmpContact50(
+eid number(10),
+mailid varchar2(20),
+phoneNo number(15))
+/
+
+Table EmpSalarys50-
+
+create table EmpSalary50(
+eid number(10),
+bSal number(20),
+hra number(15),
+da number (10),
+total number(15))
+/
+
+IN-Procedure 
+create or replace procedure EmpRegister50(
+ed number,enme varchar2,edsg varchar2,
+ho varchar,snme varchar2,ciy varchar2,stte varchar2,picode number,
+malid varchar2,phneNo number,
+bal number,hr number,da number,toal number) is 
+begin
+insert into Emp50 values(ed,enme,edsg);
+insert into EmpAddress50 values(ed,ho,snme,ciy,stte,picode);
+insert into EmpContact50 values(ed,malid,phneNo);
+insert into EmpSalary50 values(ed,bal,hr,da,toal);
+end;
+/
+
+
+OUT-Procedure 
+create or replace procedure EmpRetrieve50(
+ed number,enme OUT varchar2,edsg OUT varchar2,
+ho OUT varchar,snme OUT varchar2,ciy OUT varchar2,stte OUT varchar2,picode OUT number,
+malid OUT varchar2,phneNo OUT number,
+bal OUT number,hr OUT number,da OUT number,toal OUT number) is
+begin
+select ename,edesg into enme,edsg from Emp50 where eid=ed;
+select hno,sname,city,state,pincode into ho,snme,ciy,stte,picode from EmpAddress50 where eid=ed;
+select mailid,phoneNo into malid,phneNo from EmpContact50 where eid=ed;
+select bSal,hra,da,total into bal,hr,da,toal from EmpSalary50 where eid=ed;
+end;
+/
